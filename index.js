@@ -11,6 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const fetcher_1 = require("./fetcher");
 const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET');
     const { type, page } = req.query;
     console.log(req.query);
     switch (type) {
@@ -24,13 +26,13 @@ const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             };
             try {
                 const result = yield fetcher_1.fetchAllPosts(filter);
-                res.set('Access-Control-Allow-Origin', "*");
-                res.set('Access-Control-Allow-Methods', 'GET');
+                // res.set('Access-Control-Allow-Origin', '*');
+                // res.set('Access-Control-Allow-Methods', 'GET');
                 return res.json(result);
             }
             catch (error) {
-                res.set('Access-Control-Allow-Origin', "*");
-                res.set('Access-Control-Allow-Methods', 'GET');
+                // res.set('Access-Control-Allow-Origin', '*');
+                // res.set('Access-Control-Allow-Methods', 'GET');
                 return res.status(404).json({ message: 'No more articles' });
             }
         case 'SinglePost':
@@ -38,31 +40,31 @@ const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             const { slug } = req.query;
             try {
                 const result = yield fetcher_1.fetchSinglePostBySlug(slug);
-                res.set('Access-Control-Allow-Origin', "*");
-                res.set('Access-Control-Allow-Methods', 'GET');
+                // res.set('Access-Control-Allow-Origin', '*');
+                // res.set('Access-Control-Allow-Methods', 'GET');
                 return res.json(result);
             }
             catch (error) {
-                res.set('Access-Control-Allow-Origin', "*");
-                res.set('Access-Control-Allow-Methods', 'GET');
+                // res.set('Access-Control-Allow-Origin', '*');
+                // res.set('Access-Control-Allow-Methods', 'GET');
                 return res.status(404).json({ message: 'Couldn\'t find article are you sure you have the right link?' });
             }
         case 'Search':
             const { search } = req.query;
             try {
                 const result = yield fetcher_1.fetchOnSearch({ page, search });
-                res.set('Access-Control-Allow-Origin', "*");
-                res.set('Access-Control-Allow-Methods', 'GET');
+                // res.set('Access-Control-Allow-Origin', '*');
+                // res.set('Access-Control-Allow-Methods', 'GET');
                 return res.json(result);
             }
             catch (error) {
-                res.set('Access-Control-Allow-Origin', "*");
-                res.set('Access-Control-Allow-Methods', 'GET');
+                // res.set('Access-Control-Allow-Origin', '*');
+                // res.set('Access-Control-Allow-Methods', 'GET');
                 return res.status(404).json({ message: 'Couldn\'t find article are you sure you have the right link?' });
             }
         default:
-            res.set('Access-Control-Allow-Origin', "*");
-            res.set('Access-Control-Allow-Methods', 'GET');
+            // res.set('Access-Control-Allow-Origin', '*');
+            // res.set('Access-Control-Allow-Methods', 'GET');
             return res.status(404).json({ message: 'Nothing here wrong type' });
     }
 });
